@@ -104,29 +104,29 @@ object AlphaCloud:
       cost.getTotalCost();
     });
 
+    val iaasCost = iaasVmList.map(vm => {
+      val cost = VmCost(vm);
+      cost.getTotalCost();
+    })
+
     // Print Table Result
     new CloudletsTableBuilder(saasBroker.getCloudletFinishedList()).build();
     val softwareFee = config.getDouble("AlphaCloud.SaaS.softwareFeesPerSec");
 
     logger.info("SAAS BROKER TABLE");
-    logger.info(s"Totat Cost for saas is: ${saasCostList.sum + (saasBroker.getShutdownTime * softwareFee)}");
+    logger.info(s"Totat Cost for SAAS is: ${saasCostList.sum + (saasBroker.getShutdownTime * softwareFee)}");
 
     new CloudletsTableBuilder(paasBroker.getCloudletFinishedList()).build();
     logger.info("PAAS BROKER TABLE");
-    logger.info(s"Totat Cost for paas is: ${paasCostList.sum}")
+    logger.info(s"Totat Cost for PAAS is: ${paasCostList.sum}")
 
     new CloudletsTableBuilder(paasBrokerV2.getCloudletFinishedList()).build();
     logger.info("PAAS BROKER TABLE (TIME SHARE CLOUDLET SCHEDULER)");
-    logger.info(s"Totat Cost for paas V2 is: ${paasCostListV2.sum}")
+    logger.info(s"Totat Cost for PAAS(TIMESHARE) is: ${paasCostListV2.sum}")
 
     new CloudletsTableBuilder(iaasBroker.getCloudletFinishedList()).build();
     logger.info("IAAS NETWORK DATACENTER");
-
-
-
-
-
-
+    logger.info(s"Totat Cost for IAAS: ${iaasCost.sum}")
   }
 
   /*

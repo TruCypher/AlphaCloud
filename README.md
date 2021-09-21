@@ -134,16 +134,22 @@ AlphaCloudletScheduler avg execution time is way better than of the timeshare cl
 > However alphaCloudletScheduler still have a good performance.
 
 ### Vm simple allocation vs Vm Round Robin allocation (From Top To Bottom Respectively)
-![img.png](VmCompare.png)
+![VmCompare.png](VmCompare.png)
 ```
-If we tuned the cloudlet length to 10,000 and the amount of cloudlet to 13. We can observe that
-the Simple Vm allocation isn't efficient in spreading the task evenly among the vm; As to the Round Robin Vm Allocation, 
-it spread the task out evenly even though the total execution time is the same.
+If we tuned the cloudlet length to 10,000 and the amount of cloudlet to 13. 
+We can observe that the Simple Vm allocation isn't efficient in spreading the task evenly among the vm; 
+As to the Round Robin Vm Allocation, it spread the task out evenly even though the total execution time is the same.
 ```
 
-### IaaS
-
+### IAAS vs PAAS
+![img.png](PaaSvsIaaS.png)
+```
+The network datacenter seem like it execution time is a little bit inefficient compare to PaaS Datacenter.
+It could be because of how I design the network topology, and it could be further improve to enhace the performace.
+```
 
 ## Draw Back From AlphaCloud
 
-# Elasticity
+### Elasticity
+The AlphaCloud aren't capable of instantaneously allocate vm for the broker. 
+Which mean, it can't scale vertically nor horizontally.
