@@ -26,13 +26,15 @@ object BasicCloudSimPlusExample:
     val cloudsim = new CloudSim();
     val broker0 = new DatacenterBrokerSimple(cloudsim);
 
-    val hostPes = List(new PeSimple(config.getLong("cloudSimulator.host.mipsCapacity")))
+    val hostPes : List[Pe] = List(new PeSimple(config.getLong("cloudSimulator.host.mipsCapacity")))
     logger.info(s"Created one processing element: $hostPes")
 
-    val hostList = List(new HostSimple(config.getLong("cloudSimulator.host.RAMInMBs"),
+    val hostList = new HostSimple(config.getLong("cloudSimulator.host.RAMInMBs"),
       config.getLong("cloudSimulator.host.StorageInMBs"),
       config.getLong("cloudSimulator.host.BandwidthInMBps"),
-      hostPes.asJava))
+      hostPes.asJava) :: new HostSimple(config.getLong("cloudSimulator.host.RAMInMBs"),
+      config.getLong("cloudSimulator.host.StorageInMBs"),
+      config.getLong("cloudSimulator.host.BandwidthInMBps"), hostPes.asJava) :: Nil
 
     logger.info(s"Created one host: $hostList")
 
