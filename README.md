@@ -8,35 +8,52 @@
 ## Experimenting with cloudsim plus
 
 1. VmAllocRR.scala
-> This file is the translation from the example of cloudsim.
-> It creates a datacenter using Round Robin to map vm into hosts in the datacenters
+```
+This file is the translation from the example of cloudsim.
+It creates a datacenter using Round Robin to map vm into hosts in the datacenters
+```
+
 
 2. HorizontalScaling.scala
-> This file is also a translation from example of cloudsim.
-> It creates a datacenter capable of horizontal expansion by creating more vm when necessary.
+```
+This file is also a translation from example of cloudsim.
+It creates a datacenter capable of horizontal expansion by creating more vm when necessary.
+```
 
 ## Code Structure of Alpha Cloud
 
 1. application.conf
-> This file store all info about alphacloud
-> All the neccessary data locate inside of AlphaCloud Object
+```
+This file store all info about alphacloud
+All the neccessary data locate inside of AlphaCloud Object
+```
 
 3. AlphaCloudUtil.scala
-> This file store utility method used in AlphaCloud.scala
+```
+This file store utility method used in AlphaCloud.scala
+```
 
 3. CloudModelEnum.scala
-> This file store types of models used in AlphaCloud.scala
+```
+This file store types of models used in AlphaCloud.scala
+```
 
 4. AlphaCloudletScheduler.scala
-> This file extends CloudletSchedulerAbstract and improve the default cloudletsheduler
+```
+This file extends CloudletSchedulerAbstract and improve the default cloudletsheduler
+```
 
 5. AlphaCloudNetworkDatacenter.scala
-> Create Iaas network datacenter used in AlphaCloud.scala
+```
+Create Iaas network datacenter used in AlphaCloud.scala
+```
 
 6. AlphaCloud.scala
-> The main functionality of AlphaCloud. With many differnt datacenter models,
-> auto map the right broker to the right datacenter. Calculating cost, and 
-> showing the overall result of the simulation to show which is a good datacenter and which is not.
+```
+The main functionality of AlphaCloud. With many differnt datacenter models,
+auto map the right broker to the right datacenter. Calculating cost, and 
+showing the overall result of the simulation to show which is a good datacenter and which is not.
+```
 
 ## Infrastructure Of Simulation
 
