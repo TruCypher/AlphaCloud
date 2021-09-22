@@ -106,7 +106,7 @@ PAAS MODEL CONTAIN:
 1. A network datacenter which connect to EdgeSwitch.
 2. List of network Host which will connect to one switch through ports.
 3. List Of network Vm Uses AlphaCloudletScheduler.
-4. List Of network Cloudlet.
+4. List Of network Cloudlet which get map to a vm.
 
 In this schema the users have the ability to access the infrasturue, 
 manage the network switch on their own.
