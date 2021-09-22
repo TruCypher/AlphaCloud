@@ -12,12 +12,14 @@ object AlphaCloudUtil:
   * Broker filtered list of Datacenter Based on their infomation (@See CloudModelEnum) For type of model
   * Then Broker chooses a random datacenter from a filtered list
   */
-  def mapBrokerToDatacenter(brokerSimple: DatacenterBrokerSimple, datacenterList: List[Datacenter], cloud: CloudModelEnum.CloudModelEnum): Unit = {
+  def mapBrokerToDatacenter(brokerSimple: DatacenterBrokerSimple, datacenterList: List[Datacenter], cloud: CloudModelEnum.CloudModelEnum): Datacenter = {
     val filteredDcList = datacenterList.filter(dc => {
       dc.getName == cloud;
     })
 
     val rand = new UniformDistr(0, filteredDcList.size, seed);
+    val choosenDc = filteredDcList(rand.sample().toInt);
     logger.info(s"${brokerSimple.getName} Chooses: $cloud, Available Datacenters: $filteredDcList");
-    brokerSimple.setDatacenterMapper((dc, vm) => filteredDcList(rand.sample().toInt));
+    brokerSimple.setDatacenterMapper((dc, vm) => choosenDc);
+    return choosenDc;
   }

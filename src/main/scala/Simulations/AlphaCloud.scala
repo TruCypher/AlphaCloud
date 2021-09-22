@@ -172,7 +172,7 @@ object AlphaCloud:
     if (peAmount <= 0) {
       return peList.reverse;
     } else {
-      val newPeList : List[Pe] = new PeSimple(config.getLong("AlphaCloud.host.mipsCapacity"), new PeProvisionerSimple()) :: peList;
+      val newPeList : List[Pe] = new PeSimple(config.getDouble("AlphaCloud.host.mipsCapacity"), new PeProvisionerSimple()) :: peList;
       createPEList(peAmount - 1, newPeList);
     }
   }
@@ -222,7 +222,7 @@ object AlphaCloud:
 
   def createVm() : Vm = {
     val newVm = new VmSimple(
-      config.getLong("AlphaCloud.vm.mipsCapacity"),
+      config.getDouble("AlphaCloud.vm.mipsCapacity"),
       config.getLong("AlphaCloud.vm.PEs")
     )
       .setRam(config.getLong("AlphaCloud.vm.RAMInMBs"))

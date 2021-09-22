@@ -1,9 +1,23 @@
 # TRU NGUYEN
 
+## RUN TEST
+
+```
+1. Run sbt command
+2. type 'test' and enter
+```
+
 ## How To Use
 
+```
 1. clone and import project using IntelliJ
-2. Run Simulation.scala > Choose 4 to run AlphaCloud Simulation
+2. Run Simulation.scala > Choose 4 to run AlphaCloud simulation
+```
+
+```
+1. Run sbt command
+2. use run command > Choose 4 to run ALphacloud simulation
+```
 
 ## Experimenting with cloudsim plus
 
@@ -12,7 +26,6 @@
 This file is the translation from the example of cloudsim.
 It creates a datacenter using Round Robin to map vm into hosts in the datacenters
 ```
-
 
 2. HorizontalScaling.scala
 ```
@@ -55,7 +68,12 @@ auto map the right broker to the right datacenter. Calculating cost, and
 showing the overall result of the simulation to show which is a good datacenter and which is not.
 ```
 
-## Infrastructure Of Simulation
+7. AlphaCloudTest.scala
+```
+All of the neccessary Test.
+```
+
+## Infrastructure Of AlphaCloud
 
 1. SAAS structure
 ```
@@ -86,7 +104,7 @@ so there are 2 PaaS to demonstrate the efficiency of AlphaCloudletScheduling vs 
 ```
 PAAS MODEL CONTAIN:
 1. A network datacenter which connect to EdgeSwitch.
-2. List of network Host which will connect to one switch through a port.
+2. List of network Host which will connect to one switch through ports.
 3. List Of network Vm Uses AlphaCloudletScheduler.
 4. List Of network Cloudlet.
 
@@ -99,6 +117,33 @@ manage the network switch on their own.
 This CloudletScheduler uses combination of bestfit and spaceshare. 
 Whenever there is enough resouce for the cloudlet it will send the cloud let away. 
 Also it has the ability to preempt cloudlet in execution state which take forever to start.
+```
+
+## AlphaCloud's Pricing
+
+### SaaS Pricing
+```
+CostPerBW = 0.001
+CostPerMem = 0.0013
+CostPerSecond = 0
+CostPerStorage = 0.001
+softwareFeesPerSec = 0.00004
+
+SaaS users are the same as other user, 
+only different is that the datacenter have to implicitly calculate the price for Ram/Storage/Bandwidth.
+Also the users also have to pay for the Software fee that we provide to them.
+Beside the users already pay for software fee so we eliminate cost per second for the users
+```
+
+### PaaS And IAAS Pricing
+```
+CostPerBW = 0.001
+CostPerMem = 0.0013
+CostPerSecond = 0.001
+CostPerStorage = 0.001
+
+PaaS and IaaS users are technically the same, the only different is they have different authority on the DC.
+So the prices for these 2 boy is the same.
 ```
 
 ## Analyze AlphaCloud

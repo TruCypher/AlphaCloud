@@ -30,10 +30,10 @@ object AlphaCloudNetworkDatacenter:
     networkDatacenter.setSchedulingInterval(config.getDouble("AlphaCloud.host.SchedulingInterval"));
     networkDatacenter.setName(CloudModelEnum.IAAS);
     networkDatacenter.getCharacteristics()
-      .setCostPerBw(config.getDouble("AlphaCloud.SaaS.CostPerBW"))
-      .setCostPerMem(config.getDouble("AlphaCloud.SaaS.CostPerMem"))
-      .setCostPerSecond(config.getDouble("AlphaCloud.SaaS.CostPerSecond"))
-      .setCostPerStorage(config.getDouble("AlphaCloud.PaaS.CostPerStorage"))
+      .setCostPerBw(config.getDouble("AlphaCloud.IaaS.CostPerBW"))
+      .setCostPerMem(config.getDouble("AlphaCloud.IaaS.CostPerMem"))
+      .setCostPerSecond(config.getDouble("AlphaCloud.IaaS.CostPerSecond"))
+      .setCostPerStorage(config.getDouble("AlphaCloud.IaaS.CostPerStorage"))
 
     createNetwork(simulation, networkDatacenter);
     logger.info(s"Created Network Host List: $networkHostList");

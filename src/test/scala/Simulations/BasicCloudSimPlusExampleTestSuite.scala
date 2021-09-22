@@ -12,6 +12,6 @@ class BasicCloudSimPlusExampleTestSuite extends AnyFlatSpec with Matchers {
   }
 
   it should "obtain the MIPS capacity" in {
-    config.getLong("cloudSimulator.vm.mipsCapacity") shouldBe 1000
+    config.getLong("cloudSimulator.vm.mipsCapacity") shouldBe 1001
   }
 }
