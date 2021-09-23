@@ -44,8 +44,8 @@ object Simulation:
       DeltaCloud.deltaCloud();
     }
 
-  if (userInput != 0)
-      cli_helper();
-  }
+    if (userInput != 0)
+        cli_helper();
+    }
 
 class Simulation

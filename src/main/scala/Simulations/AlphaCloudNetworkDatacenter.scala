@@ -187,7 +187,7 @@ object AlphaCloudNetworkDatacenter:
     if (peAmount <= 0) {
       return peList.reverse;
     } else {
-      val newPeList : List[Pe] = new PeSimple(config.getLong("AlphaCloud.host.mipsCapacity"), new PeProvisionerSimple()) :: peList;
+      val newPeList : List[Pe] = new PeSimple(config.getDouble("AlphaCloud.host.mipsCapacity"), new PeProvisionerSimple()) :: peList;
       createPEList(peAmount - 1, newPeList);
     }
   }
