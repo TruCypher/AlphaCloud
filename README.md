@@ -68,12 +68,21 @@ auto map the right broker to the right datacenter. Calculating cost, and
 showing the overall result of the simulation to show which is a good datacenter and which is not.
 ```
 
-7. AlphaCloudTest.scala
+7. DeltaCloud.scala
+```
+It's sole purpose is to do analysis for different type of datacenters. 
+All of the function are belong to AlphaCloud.scala 
+```
+
+9. AlphaCloudTest.scala
 ```
 All of the neccessary Test.
 ```
 
 ## Infrastructure Of AlphaCloud
+
+> It contains 3 datacenters, with 3 different brokers trying to get to the right datacenter.
+> Each 3 datacenters are describe below.
 
 1. SAAS structure
 ```
@@ -109,7 +118,8 @@ PAAS MODEL CONTAIN:
 4. List Of network Cloudlet which get map to a vm.
 
 In this schema the users have the ability to access the infrasturue, 
-manage the network switch on their own.
+manage the network switch on their own. Thus Broker can set host interval,
+and achieve a better performance.
 ```
 
 4. AlphaCloudletScheduler
@@ -143,7 +153,7 @@ CostPerSecond = 0.001
 CostPerStorage = 0.001
 
 PaaS and IaaS users are technically the same, the only different is they have different authority on the DC.
-So the prices for these 2 boy is the same.
+So the prices for these 2 DC is the same.
 ```
 
 ## Analyze AlphaCloud
@@ -169,28 +179,22 @@ This is called under-provisioning.
 
 
 ### AlphaCloudletScheduler vs Timeshare (From Top To Bottom Respectively)
-![AlphaCCvsTimeShare.png](AlphaCCvsTimeShare.png)
+![img.png](PaaSAlphaCLoudScheduler.png)
+![img.png](PaaSTimeShare.png)
 ```
-If we tune the amound of cloudlet up to 10, and keep every thing the same.
+If we tune the amount of cloudlet to 13.
 We will expect the different performance between ALphaCloudletScheduler and CloudletSchedulerTimeShare. 
 AlphaCloudletScheduler avg execution time is way better than of the timeshare cloudlet scheduler.
-```
-> NOTE: If we tuned amount of cloudlet to about 20, timeshare execution time will be off the roof.
-> However alphaCloudletScheduler still have a good performance.
-
-### Vm simple allocation vs Vm Round Robin allocation (From Top To Bottom Respectively)
-![VmCompare.png](VmCompare.png)
-```
-If we tuned the cloudlet length to 10,000 and the amount of cloudlet to 13. 
-We can observe that the Simple Vm allocation isn't efficient in spreading the task evenly among the vm; 
-As to the Round Robin Vm Allocation, it spread the task out evenly even though the total execution time is the same.
+Moreover, no one is going to use a datacenter where the charge is off the roof. Therefore,
+AlphaCloudletScheduler proven to be better than timeshare.
 ```
 
 ### IAAS vs PAAS
-![img.png](PaaSvsIaaS.png)
+![img.png](PaaSVsIAAS.png)
 ```
-The network datacenter seem like it execution time is a little bit inefficient compare to PaaS Datacenter.
-It could be because of how I design the network topology, and it could be further improve to enhace the performace.
+The Total time it take for IAAS to finish is relatively the same as PAAS. However,
+if observe carefully, the start time in second in IAAS is much less than PAAS.
+Because of the host scheduler interval that the broker IAAS set.
 ```
 
 ## Draw Back From AlphaCloud

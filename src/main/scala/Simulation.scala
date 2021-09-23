@@ -26,6 +26,7 @@ object Simulation:
     println("Enter 2 To Run Vm Alloc RR Example");
     println("Enter 3 To Run Horizontal Scaling Eaxmple");
     println("Enter 4 To Run AlphaCloud Simulation");
+    println("Enter 5 To Run DeltaCloud Simulation");
     println("Enter 0 To Exit");
 
     print("Enter Your Choice: ")
@@ -39,9 +40,11 @@ object Simulation:
       HorizontalScaling.LBHorizontalScaling();
     } else if (userInput == 4) {
       AlphaCloud.alphaCloud();
+    } else if (userInput == 5) {
+      DeltaCloud.deltaCloud();
     }
 
-    if (userInput != 0)
+  if (userInput != 0)
       cli_helper();
   }
 

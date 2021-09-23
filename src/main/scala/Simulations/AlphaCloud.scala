@@ -66,17 +66,6 @@ object AlphaCloud:
     paasBroker.submitVmList(paasVmList.asJava);
     paasBroker.submitCloudletList(paasCloudletList.asJava);
 
-    // Paas Timeshare Broker (Use for comparision with Paas Broker)
-    val paasBrokerV2 = new DatacenterBrokerSimple((simulation), "Paas_Broker(TimeShare)");
-    val paasVmListV2 = createVmList(config.getInt("AlphaCloud.vm.Amount"));
-    logger.info(s"Created Vm List: $paasVmListV2");
-    val paasCloudletListV2 = createCloudLetList(config.getInt("AlphaCloud.cloudlet.Amount"));
-    logger.info(s"Created Cloudlet List: $paasCloudletListV2");
-    mapBrokerToDatacenter(paasBrokerV2, datacenterList, CloudModelEnum.PAAS);
-    paasVmListV2.foreach(vm => {vm.setCloudletScheduler(new CloudletSchedulerTimeShared())});
-    paasBrokerV2.submitVmList(paasVmListV2.asJava);
-    paasBrokerV2.submitCloudletList(paasCloudletListV2.asJava);
-
     // IAAS Broker
     val iaasBroker = new DatacenterBrokerSimple(simulation, "Iaas_Broker");
     val iaasVmList = createNetworkVmList();
@@ -99,11 +88,6 @@ object AlphaCloud:
       cost.getTotalCost();
     });
 
-    val paasCostListV2 = paasVmListV2.map(vm => {
-      val cost = VmCost(vm);
-      cost.getTotalCost();
-    });
-
     val iaasCost = iaasVmList.map(vm => {
       val cost = VmCost(vm);
       cost.getTotalCost();
@@ -119,10 +103,6 @@ object AlphaCloud:
     new CloudletsTableBuilder(paasBroker.getCloudletFinishedList()).build();
     logger.info("PAAS BROKER TABLE");
     logger.info(s"Totat Cost for PAAS is: ${paasCostList.sum}")
-
-    new CloudletsTableBuilder(paasBrokerV2.getCloudletFinishedList()).build();
-    logger.info("PAAS BROKER TABLE (TIME SHARE CLOUDLET SCHEDULER)");
-    logger.info(s"Totat Cost for PAAS(TIMESHARE) is: ${paasCostListV2.sum}")
 
     new CloudletsTableBuilder(iaasBroker.getCloudletFinishedList()).build();
     logger.info("IAAS NETWORK DATACENTER");
@@ -155,7 +135,7 @@ object AlphaCloud:
     val hostList = createHostList(config.getInt("AlphaCloud.host.Amount"));
     logger.info(s"Created Host List: $hostList");
 
-    val datacenter = new DatacenterSimple(simulation, hostList.asJava, new VmAllocationPolicySimple());
+    val datacenter = new DatacenterSimple(simulation, hostList.asJava, new VmAllocationPolicyRandom(new UniformDistr()));
     datacenter.getCharacteristics()
       .setCostPerBw(config.getDouble("AlphaCloud.SaaS.CostPerBW"))
       .setCostPerMem(config.getDouble("AlphaCloud.SaaS.CostPerMem"))
@@ -163,7 +143,6 @@ object AlphaCloud:
       .setCostPerStorage(config.getDouble("AlphaCloud.PaaS.CostPerStorage"))
 
     datacenter.setName(CloudModelEnum.SAAS);
-    datacenter.setSchedulingInterval(config.getDouble("AlphaCloud.host.SchedulingInterval"))
     logger.info(s"Created SaaS Datacenter $datacenter");
     return datacenter;
   }
